@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --font-dm-serif: 'DM Serif Display', Georgia, serif;
+    --font-manrope: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+:root {
+  --color-brand-cyan: #01B1EE;
+  --color-cyan-hover: #00A2D9;
+  --color-brand-black: #000000;
+  --color-near-black: #111315;
+  --color-surface-white: #FFFFFF;
+  --color-surface-offwhite: #F7FAFC;
+  --color-surface-palecyan: #EAF8FE;
+  --color-text-secondary: #47515A;
+  --color-text-muted: #697780;
+  --color-border-grey: #E1E7EB;
+  --color-link-blue: #006F96;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-manrope);
+  color: #111315;
+  background-color: #FFFFFF;
+}
+
+/* Strict Typography Scale Tokens */
+.text-token-12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.text-token-14 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.text-token-16 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.text-token-18 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.text-token-20 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.text-token-24 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.text-token-28 {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.text-token-32 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.text-token-40 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.text-token-48 {
+  font-size: 48px;
+  line-height: 64px;
+}
+
+.text-token-64 {
+  font-size: 64px;
+  line-height: 72px;
+}
+
+/* Responsive display headings according to prompt table */
+.type-hero-headline {
+  font-family: var(--font-dm-serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+}
+@media (min-width: 768px) {
+  .type-hero-headline {
+    font-size: 64px;
+    line-height: 72px;
+  }
+}
+
+.type-section-heading {
+  font-family: var(--font-dm-serif);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+}
+@media (min-width: 768px) {
+  .type-section-heading {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+.type-editorial-heading {
+  font-family: var(--font-dm-serif);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+}
+@media (min-width: 768px) {
+  .type-editorial-heading {
+    font-size: 48px;
+    line-height: 64px;
+  }
+}
+
+.type-feature-heading {
+  font-family: var(--font-manrope);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+@media (min-width: 768px) {
+  .type-feature-heading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+.font-display {
+  font-family: var(--font-dm-serif);
+}
+
+.font-body {
+  font-family: var(--font-manrope);
+}

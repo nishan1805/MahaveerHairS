@@ -1,0 +1,6 @@
+{
+  "name": "Mahaveer Hair Solution — Premium Hair Systems, Wigs & Salon Services",
+  "description": "Explore premium hair solutions, natural hair patches, custom wigs, hair extensions, and professional in-person salon consultations at Mahaveer Hair Solution.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
