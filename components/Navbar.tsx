@@ -92,64 +92,15 @@ export function Navbar({
               </button>
 
               {shopDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-[#E1E7EB] py-2 z-50 animate-fade-in">
-                  <div className="px-4 py-2 border-b border-[#E1E7EB]/60">
-                    <p className="text-token-12 font-bold tracking-wider uppercase text-[#697780]">
-                      Product Collections
-                    </p>
-                  </div>
-                  <a
-                    href="#categories"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('categories');
-                    }}
-                    className="block px-4 py-2.5 text-token-14 text-[#111315] hover:bg-[#EAF8FE] hover:text-[#006F96] transition-colors"
-                  >
-                    <span className="font-semibold">Shop All Hair Solutions</span>
-                    <p className="text-token-12 text-[#697780]">Wigs, hair patches & extensions</p>
-                  </a>
-                  <a
-                    href="#categories"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('categories');
-                    }}
-                    className="block px-4 py-2 text-token-14 text-[#111315] hover:bg-[#EAF8FE] hover:text-[#006F96] transition-colors"
-                  >
+                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-[#E1E7EB] py-3 px-4 z-50 animate-fade-in space-y-2.5">
+                  <div className="text-token-14 font-medium text-[#111315]">
                     Hair Patches / Hair Systems
-                  </a>
-                  <a
-                    href="#categories"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('categories');
-                    }}
-                    className="block px-4 py-2 text-token-14 text-[#111315] hover:bg-[#EAF8FE] hover:text-[#006F96] transition-colors"
-                  >
-                    Custom Lace & Monofilament Wigs
-                  </a>
-                  <a
-                    href="#categories"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('categories');
-                    }}
-                    className="block px-4 py-2 text-token-14 text-[#111315] hover:bg-[#EAF8FE] hover:text-[#006F96] transition-colors"
-                  >
+                  </div>
+                  <div className="text-token-14 font-medium text-[#111315]">
+                    Custom Lace &amp; Monofilament Wigs
+                  </div>
+                  <div className="text-token-14 font-medium text-[#111315]">
                     100% Remy Hair Extensions
-                  </a>
-                  <div className="border-t border-[#E1E7EB]/60 mt-1 pt-1">
-                    <a
-                      href="#featured-products"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick('featured-products');
-                      }}
-                      className="block px-4 py-2 text-token-12 font-medium text-[#006F96] hover:bg-[#EAF8FE]"
-                    >
-                      View Featured In-Stock Units →
-                    </a>
                   </div>
                 </div>
               )}

@@ -125,47 +125,25 @@ export function HairTransformation() {
   return (
     <section
       id="transformations"
-      className="py-20 lg:py-28 bg-white relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden"
     >
-      {/* Background Decorative Pale-Cyan Arcs */}
-      <svg
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-[560px] h-[560px] pointer-events-none text-[#01B1EE]"
-        viewBox="0 0 400 400"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <circle cx="200" cy="200" r="185" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.25" />
-        <circle cx="200" cy="200" r="145" stroke="currentColor" strokeWidth="1" strokeOpacity="0.15" />
-      </svg>
-      <svg
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-[560px] h-[560px] pointer-events-none text-[#01B1EE]"
-        viewBox="0 0 400 400"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <circle cx="200" cy="200" r="185" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.25" />
-        <circle cx="200" cy="200" r="145" stroke="currentColor" strokeWidth="1" strokeOpacity="0.15" />
-      </svg>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header: Centered Eyebrow, Heading & Supporting text */}
         <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             REAL TRANSFORMATIONS
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-normal text-[#111315] font-heading tracking-tight">
-            See the <span className="text-[#01B1EE]">Difference.</span>
+          <h2 className="type-section-heading text-[#111315]">
+            See the Difference
           </h2>
-          <p className="mt-4 text-[#55606A] text-[15px] sm:text-base lg:text-[17px] leading-relaxed font-body">
+          <p className="mt-3 text-token-16 text-[#697780] max-w-2xl mx-auto font-body">
             Genuine results from our customers who chose Mahaveer Hair Solution for a natural and
             confident look.
           </p>
         </div>
 
         {/* Carousel & Interactive Dual-Layer Comparison Slider Container */}
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           {/* External Left Circular Navigation Button */}
           <button
             type="button"
@@ -238,11 +216,11 @@ export function HairTransformation() {
               className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.5)] pointer-events-none z-20"
               style={{ left: `${sliderPos}%` }}
             >
-              {/* Circular Center Handle with Left/Right Arrows */}
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white shadow-xl border border-[#E1E7EB] flex items-center justify-center text-[#111315] pointer-events-none">
-                <div className="flex items-center text-[#111315]">
-                  <ChevronLeft className="w-3.5 h-3.5 stroke-[2.5] -mr-1 text-[#111315]" />
-                  <ChevronRight className="w-3.5 h-3.5 stroke-[2.5] text-[#111315]" />
+              {/* Minimal Divider Grip Indicator */}
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-10 rounded-full bg-white shadow-md border border-[#D5E0E6] flex items-center justify-center pointer-events-none">
+                <div className="flex gap-0.5">
+                  <div className="w-0.5 h-3.5 bg-[#94A3B8] rounded-full" />
+                  <div className="w-0.5 h-3.5 bg-[#94A3B8] rounded-full" />
                 </div>
               </div>
             </div>

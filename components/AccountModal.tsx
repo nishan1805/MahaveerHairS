@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Smartphone, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { X, Smartphone, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface AccountModalProps {
   isOpen: boolean;
@@ -86,13 +86,6 @@ export function AccountModal({ isOpen, onClose }: AccountModalProps) {
                     className="w-full pl-16 pr-4 py-2.5 rounded-lg border border-[#E1E7EB] text-token-16 focus:outline-none focus:border-[#01B1EE] focus:ring-1 focus:ring-[#01B1EE] transition"
                   />
                 </div>
-              </div>
-
-              <div className="p-3 bg-[#EAF8FE] rounded-lg border border-[#01B1EE]/30 text-token-12 text-[#006F96] flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 mt-0.5 shrink-0 text-[#01B1EE]" />
-                <span>
-                  Prototype demonstration: Enter any 10-digit number to preview the OTP verification flow.
-                </span>
               </div>
 
               <button

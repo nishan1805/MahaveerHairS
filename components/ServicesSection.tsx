@@ -49,17 +49,17 @@ const SERVICES: ServiceItem[] = [
 
 export function ServicesSection({ onBookService }: ServicesSectionProps) {
   return (
-    <section id="services" className="py-16 md:py-24 bg-white">
+    <section id="services" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-10 sm:mb-14">
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             IN-SALON PROFESSIONAL CARE
           </p>
 
           {/* Heading in DM Serif Display */}
           <h2 className="type-section-heading text-[#111315]">
-            Expert Care <span className="text-[#01B1EE]">for Your Hair</span>
+            Expert Care for Your Hair
           </h2>
 
           {/* Short Supporting Description in Manrope */}
@@ -101,10 +101,7 @@ export function ServicesSection({ onBookService }: ServicesSectionProps) {
                   </p>
                 </div>
 
-                <div>
-                  {/* Subtle Divider */}
-                  <div className="border-t border-[#E1E7EB] my-5" />
-
+                <div className="mt-5">
                   {/* Full-Width Outlined Book Service Button */}
                   <button
                     type="button"
@@ -139,25 +136,21 @@ export function ServicesSection({ onBookService }: ServicesSectionProps) {
             <circle cx="160" cy="160" r="60" stroke="currentColor" strokeWidth="1" strokeOpacity="0.2" />
           </svg>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-start relative z-10">
             {/* Left Column: Eyebrow, Heading, Description, Benefits, CTA */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
-              {/* Eyebrow Label + Cyan Rule */}
-              <div className="flex items-center gap-3">
-                <span className="text-token-12 font-bold uppercase tracking-wider text-[#01B1EE] font-body">
-                  ABOUT MAHAVEER HAIR SOLUTION
-                </span>
-                <span className="w-12 h-0.5 bg-[#01B1EE] rounded-full inline-block" />
-              </div>
+            <div className="lg:col-span-6 flex flex-col justify-start">
+              {/* Eyebrow Label */}
+              <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
+                ABOUT MAHAVEER HAIR SOLUTION
+              </p>
 
               {/* Main Heading */}
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] leading-[1.2] font-normal text-[#111315] font-heading tracking-tight">
-                Craftsmanship, Discretion &amp;{' '}
-                <span className="text-[#01B1EE]">Natural Aesthetics</span>
+              <h2 className="type-section-heading text-[#111315]">
+                Craftsmanship, Discretion &amp; Natural Aesthetics
               </h2>
 
               {/* Description */}
-              <p className="mt-4 sm:mt-5 text-[#55606A] text-[15px] sm:text-base leading-relaxed font-body max-w-xl">
+              <p className="mt-3 text-token-16 text-[#697780] font-body max-w-xl leading-relaxed">
                 Mahaveer Hair Solution was established in Raipur to provide authentic, dignified, and
                 natural-looking hair solutions. Our studio focuses on personalized care, modern techniques,
                 and professional styling to help you look and feel your best.
@@ -211,9 +204,9 @@ export function ServicesSection({ onBookService }: ServicesSectionProps) {
               </div>
             </div>
 
-            {/* Right Column: Salon Interior Photograph aligned with main heading */}
-            <div className="lg:col-span-6 lg:self-end mt-2 lg:mt-6">
-              <div className="relative w-full aspect-[824/554] rounded-2xl md:rounded-[28px] overflow-hidden shadow-sm border border-white/80 bg-slate-100">
+            {/* Right Column: Taller Salon Interior Photograph aligned with main heading */}
+            <div className="lg:col-span-6 flex flex-col justify-start w-full">
+              <div className="relative w-full h-[400px] sm:h-[460px] lg:h-[500px] xl:h-[520px] rounded-2xl md:rounded-[28px] overflow-hidden shadow-sm border border-white/80 bg-slate-100">
                 <Image
                   src="/images/about-salon.png"
                   alt="Mahaveer Hair Solution luxury modern salon interior in Raipur"

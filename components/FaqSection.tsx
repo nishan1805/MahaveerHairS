@@ -39,17 +39,17 @@ export function FaqSection({}: FaqSectionProps) {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-white">
+    <section id="faq" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             GOT QUESTIONS?
           </p>
           <h2 className="type-section-heading text-[#111315]">
             Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-token-16 text-[#47515A]">
+          <p className="mt-3 text-token-16 text-[#697780] font-body">
             Learn more about choosing a suitable hair solution, visiting our centre, and daily care.
           </p>
         </div>

@@ -72,7 +72,8 @@ export function CustomerReviews({}: CustomerReviewsProps) {
         const data: ReviewsApiResponse = await res.json();
         if (isMounted) {
           if (data.reviews && data.reviews.length > 0) {
-            setReviews(data.reviews);
+            const fiveStarReviews = data.reviews.filter((r) => r.rating === 5);
+            setReviews(fiveStarReviews);
           } else {
             setReviews([]);
           }
@@ -178,11 +179,11 @@ export function CustomerReviews({}: CustomerReviewsProps) {
       aria-label="Customer Reviews"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className="py-16 md:py-24 bg-white focus:outline-hidden"
+      className="py-12 sm:py-16 md:py-20 bg-white focus:outline-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-6">
           <div className="max-w-2xl">
             <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
               VERIFIED EXPERIENCES
@@ -339,31 +340,84 @@ export function CustomerReviews({}: CustomerReviewsProps) {
                     className="p-6 md:p-7 rounded-2xl border border-[#E1E7EB] bg-white hover:border-[#01B1EE]/40 hover:shadow-xs transition-all duration-200 flex flex-col justify-between h-full min-h-[270px]"
                   >
                     <div>
-                      {/* Top Row: Gold Stars & Google Attribution */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div
-                          className="flex items-center gap-1 text-[#FBBC04]"
-                          aria-label={`${rev.rating} out of 5 stars`}
-                        >
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`w-4 h-4 ${
-                                i < rev.rating
-                                  ? 'fill-current'
-                                  : 'text-[#E1E7EB]'
-                              }`}
-                            />
-                          ))}
+                      {/* 1. Reviewer Details (Top) */}
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          {/* Avatar */}
+                          <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#EAF8FE] border border-[#E1E7EB] shrink-0 flex items-center justify-center text-[#006F96] font-bold text-token-14">
+                            {hasImage ? (
+                              <Image
+                                src={rev.authorPhotoUrl!}
+                                alt={rev.authorName}
+                                fill
+                                sizes="40px"
+                                className="object-cover"
+                                referrerPolicy="no-referrer"
+                                onError={() => handleImageError(rev.id)}
+                              />
+                            ) : (
+                              <span>{initial}</span>
+                            )}
+                          </div>
+
+                          {/* Name and Relative Date */}
+                          <div className="min-w-0">
+                            {rev.authorUri ? (
+                              <a
+                                href={rev.authorUri}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-token-14 font-bold text-[#111315] hover:text-[#006F96] truncate block transition-colors"
+                              >
+                                {rev.authorName}
+                              </a>
+                            ) : (
+                              <h4 className="text-token-14 font-bold text-[#111315] truncate">
+                                {rev.authorName}
+                              </h4>
+                            )}
+                            <p className="text-token-12 text-[#697780] truncate">
+                              {rev.relativeTime}
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 text-token-12 text-[#697780]">
-                          <GoogleIcon className="w-3.5 h-3.5" />
-                          <span>Google</span>
-                        </div>
+                        {/* Google Logo / Icon */}
+                        {rev.googleMapsUrl ? (
+                          <a
+                            href={rev.googleMapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View review by ${rev.authorName} on Google`}
+                            className="shrink-0 p-1.5 hover:opacity-80 transition-opacity"
+                          >
+                            <GoogleIcon className="w-4 h-4" />
+                          </a>
+                        ) : (
+                          <div className="shrink-0 p-1.5">
+                            <GoogleIcon className="w-4 h-4" />
+                          </div>
+                        )}
                       </div>
 
-                      {/* Review Text */}
+                      {/* 2. Star Rating */}
+                      <div
+                        className="flex items-center gap-1 text-[#FBBC04] mb-3"
+                        aria-label={`${rev.rating} out of 5 stars`}
+                      >
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < rev.rating
+                                ? 'fill-current'
+                                : 'text-[#E1E7EB]'
+                            }`}
+                          />
+                        ))}
+                      </div>
+
+                      {/* 3. Review Text */}
                       {rev.text ? (
                         <div className="text-token-14 md:text-token-15 text-[#333D44] leading-relaxed">
                           <p>&ldquo;{displayText}&rdquo;</p>
@@ -381,62 +435,6 @@ export function CustomerReviews({}: CustomerReviewsProps) {
                         <p className="text-token-14 text-[#697780] italic">
                           Rating left on Google without written text.
                         </p>
-                      )}
-                    </div>
-
-                    {/* Reviewer Details */}
-                    <div className="mt-6 pt-4 border-t border-[#E1E7EB] flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3 min-w-0">
-                        {/* Avatar */}
-                        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#EAF8FE] border border-[#E1E7EB] shrink-0 flex items-center justify-center text-[#006F96] font-bold text-token-14">
-                          {hasImage ? (
-                            <Image
-                              src={rev.authorPhotoUrl!}
-                              alt={rev.authorName}
-                              fill
-                              sizes="40px"
-                              className="object-cover"
-                              referrerPolicy="no-referrer"
-                              onError={() => handleImageError(rev.id)}
-                            />
-                          ) : (
-                            <span>{initial}</span>
-                          )}
-                        </div>
-
-                        {/* Name and Relative Date */}
-                        <div className="min-w-0">
-                          {rev.authorUri ? (
-                            <a
-                              href={rev.authorUri}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-token-14 font-bold text-[#111315] hover:text-[#006F96] truncate block transition-colors"
-                            >
-                              {rev.authorName}
-                            </a>
-                          ) : (
-                            <h4 className="text-token-14 font-bold text-[#111315] truncate">
-                              {rev.authorName}
-                            </h4>
-                          )}
-                          <p className="text-token-12 text-[#697780] truncate">
-                            {rev.relativeTime}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Small external Google link icon if maps url is available */}
-                      {rev.googleMapsUrl && (
-                        <a
-                          href={rev.googleMapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`View review by ${rev.authorName} on Google`}
-                          className="shrink-0 p-1.5 text-[#697780] hover:text-[#01B1EE] rounded-md transition-colors"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
                       )}
                     </div>
                   </div>

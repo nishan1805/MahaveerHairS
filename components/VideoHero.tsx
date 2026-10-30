@@ -49,7 +49,6 @@ export function VideoHero({ onExploreProducts, onBookAppointment }: VideoHeroPro
           objectPosition: 'center',
         }}
       >
-        <source src="/assets/aistudio/Hero_bg_1e4b6279.mp4" type="video/mp4" />
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
       </video>
 
@@ -63,14 +62,8 @@ export function VideoHero({ onExploreProducts, onBookAppointment }: VideoHeroPro
         aria-hidden="true"
       />
 
-      {/* Hero Content Overlay (Above video, z-10) - Rebalanced vertical rhythm */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36 text-center flex flex-col items-center">
-        {/* Subtle Brand Tagline */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#01B1EE] text-token-14 font-medium mb-6 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-[#01B1EE]" />
-          <span>Non-Surgical Hair Replacement & Custom Wig Studio</span>
-        </div>
-
+      {/* Hero Content Overlay (Above video, z-10) - Visually centered */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40 text-center flex flex-col items-center">
         {/* Hero Headline (DM Serif Display 64px desktop / 40px mobile) */}
         <h1 className="type-hero-headline text-white max-w-4xl text-balance tracking-tight drop-shadow-md">
           Hair Solutions, Tailored to You.

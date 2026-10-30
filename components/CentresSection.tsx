@@ -153,7 +153,7 @@ export function CentresSection({ onBookAtCentre }: CentresSectionProps) {
   const currentCards = activeSlides[safeSlideIndex] || [];
 
   return (
-    <section id="branches" className="relative py-16 md:py-24 bg-white">
+    <section id="branches" className="relative py-12 sm:py-16 md:py-20 bg-white">
       {/* Anchor target to preserve backward-compatible navigation links to #centres */}
       <span id="centres" className="absolute -top-24 opacity-0 pointer-events-none" aria-hidden="true" />
 
@@ -163,10 +163,10 @@ export function CentresSection({ onBookAtCentre }: CentresSectionProps) {
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             VISIT US
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-[44px] text-[#111315] font-normal tracking-tight leading-[1.15]">
+          <h2 className="type-section-heading text-[#111315]">
             Our Branches
           </h2>
-          <p className="mt-3 text-token-16 md:text-[17px] text-[#556068] leading-relaxed font-body">
+          <p className="mt-3 text-token-16 text-[#697780] max-w-2xl font-body leading-relaxed">
             Experience expert consultations and personalised care at our branches across Chhattisgarh and Odisha.
           </p>
         </div>

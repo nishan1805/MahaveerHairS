@@ -60,17 +60,17 @@ export function ShopByCategory({ onSelectCategory, onOpenConsultation }: ShopByC
   };
 
   return (
-    <section id="categories" className="py-16 md:py-24 bg-white">
+    <section id="categories" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-10 sm:mb-14">
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             SHOP BY CATEGORY
           </p>
 
           {/* Section Heading: DM Serif Display */}
           <h2 className="type-section-heading text-[#111315]">
-            Find Your Perfect <span className="text-[#01B1EE]">Hair Solution</span>
+            Find Your Perfect Hair Solution
           </h2>
         </div>
 

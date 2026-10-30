@@ -33,7 +33,7 @@ export function ConsultationCTA({ onOpenConsultationModal }: ConsultationCTAProp
   };
 
   return (
-    <section id="consultation" className="py-16 md:py-20 lg:py-24 bg-white">
+    <section id="consultation" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Consultation Card */}
         <div className="rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#F5FBFE] via-[#EDF8FD] to-[#E3F4FC] border border-[#D5E8F3] p-8 sm:p-10 md:p-12 lg:p-14 xl:p-16 relative overflow-hidden shadow-xs">
@@ -76,19 +76,18 @@ export function ConsultationCTA({ onOpenConsultationModal }: ConsultationCTAProp
               </p>
 
               {/* Headline */}
-              <h2 className="mt-2 text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] leading-[1.18] font-normal text-[#111315] font-heading tracking-tight">
-                Not Sure Which Solution <br className="hidden sm:inline" />
-                Is Right <span className="text-[#01B1EE]">for You?</span>
+              <h2 className="type-section-heading text-[#111315]">
+                Not Sure Which Solution Is Right for You?
               </h2>
 
               {/* Supporting Paragraph */}
-              <p className="mt-3 sm:mt-4 text-[#55606A] text-[15px] sm:text-base leading-relaxed max-w-lg font-body">
+              <p className="mt-3 text-token-16 text-[#697780] font-body max-w-lg leading-relaxed">
                 Speak with our experts to explore the available options and find the best next step
                 for your needs.
               </p>
 
               {/* Salon Photograph */}
-              <div className="mt-6 sm:mt-8 relative w-full aspect-[16/11] sm:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden border border-[#D5E8F3] shadow-sm">
+              <div className="mt-6 sm:mt-8 relative w-full aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden border border-[#D5E8F3] shadow-sm bg-slate-100">
                 <Image
                   src="/images/consultation-salon.png"
                   alt="Mahaveer Hair Solution private consultation studio and salon interior"

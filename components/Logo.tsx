@@ -15,17 +15,15 @@ export function Logo({
   isTransparentHeader = true,
   size = 'default',
 }: LogoProps) {
-  // Use uploaded transparent white logo with cyan accents on dark backgrounds (hero header, footer).
-  // On scrolled header with white background (!isTransparentHeader), switch to dark logo asset for clean contrast.
-  const isDarkBackground = isTransparentHeader || size === '2x';
-  const logoSrc = isDarkBackground
-    ? '/assets/aistudio/MHS_logo_f9c2cc07.png'
-    : '/assets/aistudio/MHS_Logo_084c6af9.png';
+  const logoSrc = '/images/MHS_logo_f9c2cc07.png';
 
   const heightClasses =
     size === '2x'
       ? 'h-[72px] sm:h-[80px] md:h-[88px]'
       : 'h-9 sm:h-10 md:h-11';
+
+  // On scrolled header with light background, apply brightness-0 for crisp dark contrast
+  const filterClass = !isTransparentHeader && size !== '2x' ? 'brightness-0' : '';
 
   return (
     <a
@@ -41,7 +39,7 @@ export function Logo({
           height={1492}
           priority
           referrerPolicy="no-referrer"
-          className={`${heightClasses} w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]`}
+          className={`${heightClasses} w-auto object-contain transition-all duration-200 group-hover:scale-[1.02] ${filterClass}`}
         />
       </div>
     </a>

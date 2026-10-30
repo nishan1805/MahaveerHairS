@@ -117,22 +117,21 @@ export function PromoCarousel({ onSelectCollection }: PromoCarouselProps) {
         {/* Banner Frame with Overlapping Clean Circular Controls */}
         <div className="relative">
           {/* Main Pure Image-Based Slide Container */}
-          <div className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl shadow-xs border border-[#E1E7EB]/70 bg-white">
+          <div className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl shadow-xs border border-[#E1E7EB]/70 bg-white aspect-[2.6/1] sm:aspect-[3.4/1] md:aspect-[1380/304]">
             <div
-              className={`flex w-full ${
+              className={`flex w-full h-full ${
                 prefersReducedMotion ? '' : 'transition-transform duration-500 ease-in-out'
               }`}
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {SLIDES.map((slide, idx) => (
-                <div key={slide.id} className="min-w-full w-full shrink-0">
+                <div key={slide.id} className="min-w-full w-full h-full shrink-0 relative">
                   <Image
                     src={slide.image}
                     alt={slide.alt}
-                    width={1440}
-                    height={304}
+                    fill
                     priority={idx === 0}
-                    className="w-full h-auto block object-cover"
+                    className="object-cover object-center"
                     sizes="(max-width: 768px) 100vw, 1280px"
                   />
                 </div>

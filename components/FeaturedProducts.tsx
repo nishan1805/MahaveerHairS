@@ -69,7 +69,7 @@ const PRODUCTS: Product[] = [
     price: 4499,
     originalPrice: 5999,
     discount: '25% OFF',
-    image: '/images/categories/hair-loss.png',
+    image: '/images/services/system-maintenance.png',
     imageAlt: 'Targeted scalp care serum and natural hair follicle density therapy set',
   },
   {
@@ -79,7 +79,7 @@ const PRODUCTS: Product[] = [
     price: 2499,
     originalPrice: 3499,
     discount: '28% OFF',
-    image: '/images/categories/accessories.png',
+    image: '/images/products/hair-system.png',
     imageAlt: 'Specialized waterproof tapes, solvent remover, and maintenance accessories',
   },
   {
@@ -89,7 +89,7 @@ const PRODUCTS: Product[] = [
     price: 9999,
     originalPrice: 13999,
     discount: '28% OFF',
-    image: '/images/categories/hair-patches.png',
+    image: '/images/products/mens-hair-patch.png',
     imageAlt: 'Ultra-breathable French lace front non-surgical custom hair patch',
   },
   {
@@ -99,7 +99,7 @@ const PRODUCTS: Product[] = [
     price: 17999,
     originalPrice: 22499,
     discount: '20% OFF',
-    image: '/images/categories/wigs.png',
+    image: '/images/products/premium-womens-wig.png',
     imageAlt: 'Feather-light monofilament hand-tied human hair natural wig',
   },
 ];
@@ -189,17 +189,17 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
   };
 
   return (
-    <section id="featured-products" className="py-16 md:py-24 bg-white">
+    <section id="featured-products" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-10 sm:mb-14">
           <p className="text-[#01B1EE] text-xs sm:text-sm font-bold tracking-widest uppercase mb-2 sm:mb-3 font-body">
             FEATURED PRODUCTS
           </p>
 
           {/* Heading in DM Serif Display */}
           <h2 className="type-section-heading text-[#111315]">
-            Best Picks for <span className="text-[#01B1EE]">Natural Confidence</span>
+            Best Picks for Natural Confidence
           </h2>
 
           {/* Short Supporting Description in Manrope */}
