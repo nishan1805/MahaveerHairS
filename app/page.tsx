@@ -15,6 +15,7 @@ import { FaqSection } from '@/components/FaqSection';
 import { Footer } from '@/components/Footer';
 import { CartDrawer, CartItem } from '@/components/CartDrawer';
 import { AccountModal } from '@/components/AccountModal';
+import { FloatingActionButtons } from '@/components/FloatingActionButtons';
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -173,6 +174,9 @@ export default function HomePage() {
         isOpen={accountOpen}
         onClose={() => setAccountOpen(false)}
       />
+
+      {/* Floating Call & WhatsApp Buttons */}
+      <FloatingActionButtons />
     </div>
   );
 }

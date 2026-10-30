@@ -3,6 +3,7 @@
 import React from 'react';
 import { Logo } from './Logo';
 import { MapPin, Phone, Mail, Clock, ArrowUp, ShieldCheck } from 'lucide-react';
+import { CONTACT_INFO } from '@/lib/contact';
 
 interface FooterProps {
   onOpenConsultation: () => void;
@@ -37,7 +38,12 @@ export function Footer({ onOpenConsultation, onOpenAccount }: FooterProps) {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#01B1EE] shrink-0" />
-                <span className="text-token-14 tabular-nums">+91 99932 39828 / +91 91449 39828</span>
+                <a
+                  href={CONTACT_INFO.telLink}
+                  className="text-token-14 tabular-nums hover:text-[#01B1EE] transition-colors"
+                >
+                  {CONTACT_INFO.primaryPhone} / {CONTACT_INFO.secondaryPhone}
+                </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-[#01B1EE] shrink-0" />
