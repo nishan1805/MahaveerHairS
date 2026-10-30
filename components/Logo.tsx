@@ -20,7 +20,7 @@ export function Logo({
   const heightClasses =
     size === '2x'
       ? 'h-[72px] sm:h-[80px] md:h-[88px]'
-      : 'h-9 sm:h-10 md:h-11';
+      : 'h-[54px] sm:h-[60px] md:h-[66px]';
 
   // On scrolled header with light background, apply brightness-0 for crisp dark contrast
   const filterClass = !isTransparentHeader && size !== '2x' ? 'brightness-0' : '';
