@@ -121,7 +121,7 @@ export function ServicesSection({ onBookService }: ServicesSectionProps) {
         {/* Integrated Brand Introduction Area (#about anchor for Navbar navigation) */}
         <div
           id="about"
-          className="mt-16 lg:mt-24 rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#FFFFFF] via-[#F8FDFF] to-[#EBF8FE] border border-[#E1E7EB] p-8 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden shadow-xs"
+          className="mt-16 lg:mt-24 rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#FFFFFF] via-[#F8FDFF] to-[#EBF8FE] border border-[#E1E7EB] p-4 sm:p-8 md:p-12 lg:p-14 relative overflow-hidden shadow-xs"
         >
           {/* Background Decorative Cyan Arcs */}
           <svg

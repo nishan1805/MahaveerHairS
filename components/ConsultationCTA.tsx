@@ -36,7 +36,7 @@ export function ConsultationCTA({ onOpenConsultationModal }: ConsultationCTAProp
     <section id="consultation" className="py-12 sm:py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Consultation Card */}
-        <div className="rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#F5FBFE] via-[#EDF8FD] to-[#E3F4FC] border border-[#D5E8F3] p-8 sm:p-10 md:p-12 lg:p-14 xl:p-16 relative overflow-hidden shadow-xs">
+        <div className="rounded-3xl md:rounded-[36px] bg-gradient-to-br from-[#F5FBFE] via-[#EDF8FD] to-[#E3F4FC] border border-[#D5E8F3] p-4 sm:p-8 md:p-12 lg:p-14 xl:p-16 relative overflow-hidden shadow-xs">
           {/* Subtle Decorative Curves & Arcs */}
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/40 rounded-full blur-3xl pointer-events-none" />
           <svg
@@ -99,7 +99,7 @@ export function ConsultationCTA({ onOpenConsultationModal }: ConsultationCTAProp
             </div>
 
             {/* Right Column: Expanded White Form Card (lg:col-span-7) */}
-            <div className="lg:col-span-7 bg-white rounded-2xl md:rounded-[28px] border border-[#E1E7EB] p-7 sm:p-9 lg:p-10 xl:p-12 shadow-lg shadow-black/[0.04]">
+            <div className="lg:col-span-7 bg-white rounded-2xl md:rounded-[28px] border border-[#E1E7EB] p-4 sm:p-7 lg:p-10 xl:p-12 shadow-lg shadow-black/[0.04]">
               {submitted ? (
                 <div className="text-center py-8 space-y-4">
                   <div className="w-14 h-14 rounded-full bg-[#E0F4FD] flex items-center justify-center mx-auto text-[#01B1EE]">
@@ -251,10 +251,10 @@ export function ConsultationCTA({ onOpenConsultationModal }: ConsultationCTAProp
                   {/* Full-Width Cyan Submit Button */}
                   <button
                     type="submit"
-                    className="w-full py-3.5 px-6 bg-[#01B1EE] hover:bg-[#009ED6] text-[#111315] font-bold text-token-15 rounded-xl transition-all shadow-sm active:scale-[0.99] flex items-center justify-center gap-2 mt-3 font-body cursor-pointer"
+                    className="w-full py-3.5 px-4 sm:px-6 bg-[#01B1EE] hover:bg-[#009ED6] text-[#111315] font-bold text-sm sm:text-token-15 rounded-xl transition-all shadow-sm active:scale-[0.99] flex items-center justify-center gap-2 mt-3 font-body cursor-pointer whitespace-nowrap"
                   >
-                    <span>Request Appointment</span>
-                    <ArrowRight className="w-4 h-4 text-[#111315]" />
+                    <span className="whitespace-nowrap">Request Appointment</span>
+                    <ArrowRight className="w-4 h-4 text-[#111315] shrink-0" />
                   </button>
 
                   {/* Discreet Privacy Note */}

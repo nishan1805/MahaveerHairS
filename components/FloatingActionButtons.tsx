@@ -18,7 +18,9 @@ function WhatsAppIcon({ className = 'w-6 h-6' }: { className?: string }) {
   );
 }
 
-export function FloatingActionButtons() {
+export function FloatingActionButtons({ hidden = false }: { hidden?: boolean }) {
+  if (hidden) return null;
+
   return (
     <aside
       aria-label="Direct Contact Shortcuts"

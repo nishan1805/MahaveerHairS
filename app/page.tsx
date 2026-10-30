@@ -22,6 +22,7 @@ export default function HomePage() {
   const [cartOpen, setCartOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Smooth scroll listener for navbar transparent -> solid transition
   useEffect(() => {
@@ -91,6 +92,7 @@ export default function HomePage() {
         onOpenAccount={() => setAccountOpen(true)}
         onOpenConsultation={() => scrollToAnchor('consultation')}
         isScrolled={isScrolled}
+        onMobileMenuChange={setIsMobileMenuOpen}
       />
 
       <main className="flex-1">
@@ -176,7 +178,7 @@ export default function HomePage() {
       />
 
       {/* Floating Call & WhatsApp Buttons */}
-      <FloatingActionButtons />
+      <FloatingActionButtons hidden={isMobileMenuOpen} />
     </div>
   );
 }

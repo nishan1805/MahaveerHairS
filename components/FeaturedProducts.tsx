@@ -106,6 +106,7 @@ const PRODUCTS: Product[] = [
 
 export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
   const [addedId, setAddedId] = useState<string | null>(null);
+  const [showAllMobile, setShowAllMobile] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(4);
@@ -208,74 +209,67 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
           </p>
         </div>
 
-        {/* Carousel Frame with Outside Left/Right Circular Arrow Controls */}
-        <div className="relative">
-          {/* Scrollable Products Carousel Row */}
-          <div
-            ref={scrollContainerRef}
-            onScroll={checkScroll}
-            className="flex gap-6 overflow-x-auto pb-4 scroll-smooth no-scrollbar snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {PRODUCTS.map((product) => (
+        {/* Mobile View: 2-Column Grid (4 products initially, expandable with View All toggle) */}
+        <div className="block md:hidden">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {(showAllMobile ? PRODUCTS : PRODUCTS.slice(0, 4)).map((product) => (
               <div
                 key={product.id}
-                className="w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)] shrink-0 snap-start bg-white rounded-2xl border border-[#E1E7EB] shadow-xs hover:border-[#01B1EE]/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                className="bg-white rounded-2xl border border-[#E1E7EB] shadow-2xs hover:border-[#01B1EE]/60 transition-all duration-200 flex flex-col justify-between overflow-hidden group"
               >
                 {/* Product Image Area */}
                 <div className="relative aspect-square w-full overflow-hidden bg-[#F7FAFC] rounded-t-2xl">
                   <Image
                     src={product.image}
                     alt={product.imageAlt}
-                    width={358}
-                    height={353}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    priority
+                    width={280}
+                    height={280}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 
-                {/* Product Information Area */}
-                <div className="p-5 flex flex-col justify-between flex-1">
+                {/* Product Info */}
+                <div className="p-3 sm:p-4 flex flex-col justify-between flex-1">
                   <div>
                     {/* Category Label */}
-                    <span className="text-token-12 font-medium text-[#006F96] tracking-wide mb-1 block">
+                    <span className="text-[10px] sm:text-xs font-semibold text-[#006F96] tracking-wide mb-1 block truncate">
                       {product.category}
                     </span>
 
                     {/* Product Name */}
-                    <h3 className="text-token-16 md:text-token-18 font-semibold text-[#111315] line-clamp-1 mb-2 font-body">
+                    <h3 className="text-xs sm:text-sm font-semibold text-[#111315] line-clamp-1 mb-1.5 font-body">
                       {product.name}
                     </h3>
 
-                    {/* Price Row: Current Price, Original Price with Strikethrough, Discount Badge */}
-                    <div className="flex items-center gap-2 mb-4 flex-wrap">
-                      <span className="text-token-18 md:text-token-20 font-bold text-[#111315] tabular-nums font-body">
+                    {/* Price Row: Current Price, Original Price, Discount */}
+                    <div className="flex items-baseline gap-1.5 mb-3 flex-wrap">
+                      <span className="text-xs sm:text-sm font-bold text-[#111315] tabular-nums font-body">
                         ₹ {product.price.toLocaleString('en-IN')}
                       </span>
-                      <span className="text-token-14 text-[#697780] line-through tabular-nums font-body">
+                      <span className="text-[10px] text-[#697780] line-through tabular-nums font-body">
                         ₹ {product.originalPrice.toLocaleString('en-IN')}
                       </span>
-                      <span className="bg-[#D1F7E8] text-[#0A7B55] text-token-12 font-bold px-2.5 py-0.5 rounded-md font-body">
+                      <span className="bg-[#D1F7E8] text-[#0A7B55] text-[9px] font-bold px-1.5 py-0.5 rounded font-body">
                         {product.discount}
                       </span>
                     </div>
                   </div>
 
-                  {/* Dark Add to Cart Button */}
+                  {/* Compact Add to Cart Button */}
                   <button
                     type="button"
                     onClick={() => handleAdd(product)}
-                    className="w-full py-3 bg-[#15191E] hover:bg-[#000000] text-white font-semibold text-token-14 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs active:scale-[0.98] font-body"
+                    className="w-full py-2 bg-[#15191E] hover:bg-black text-white font-semibold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-[0.98] font-body"
                     aria-label={`Add ${product.name} to cart`}
                   >
                     {addedId === product.id ? (
                       <>
-                        <Check className="w-4 h-4 text-[#01B1EE]" />
-                        <span>Added to Cart</span>
+                        <Check className="w-3.5 h-3.5 text-[#01B1EE]" />
+                        <span>Added</span>
                       </>
                     ) : (
                       <>
-                        <ShoppingCart className="w-4 h-4" />
+                        <ShoppingCart className="w-3.5 h-3.5" />
                         <span>Add to Cart</span>
                       </>
                     )}
@@ -285,51 +279,146 @@ export function FeaturedProducts({ onAddToCart }: FeaturedProductsProps) {
             ))}
           </div>
 
-          {/* Left Arrow Button (Circular white, outside the row) */}
-          <button
-            type="button"
-            onClick={() => handleScroll('left')}
-            aria-label="Previous products"
-            className="absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-5 lg:-left-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-[#111315] border border-[#E1E7EB] shadow-md hover:bg-[#EAF8FE] hover:border-[#01B1EE] hover:text-[#006F96] flex items-center justify-center transition-all active:scale-95 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE]"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Right Arrow Button (Circular white, outside the row) */}
-          <button
-            type="button"
-            onClick={() => handleScroll('right')}
-            aria-label="Next products"
-            className="absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-5 lg:-right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-[#111315] border border-[#E1E7EB] shadow-md hover:bg-[#EAF8FE] hover:border-[#01B1EE] hover:text-[#006F96] flex items-center justify-center transition-all active:scale-95 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE]"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
+          {/* View All / Show Less Mobile Action */}
+          <div className="mt-6 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAllMobile(!showAllMobile)}
+              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl border border-[#01B1EE] bg-white hover:bg-[#EAF8FE] text-[#006F96] font-semibold text-xs sm:text-sm transition-all shadow-2xs active:scale-95 cursor-pointer"
+            >
+              <span>
+                {showAllMobile
+                  ? 'Show Less'
+                  : `View All Products (${PRODUCTS.length})`}
+              </span>
+            </button>
+          </div>
         </div>
 
-        {/* Standardized Pagination Indicators: 8px Grey Dots & 28px Cyan Pill */}
-        {totalPages > 1 && (
-          <div
-            className="mt-8 sm:mt-10 flex items-center justify-center gap-2"
-            role="tablist"
-            aria-label="Product carousel pagination"
-          >
-            {[...Array(totalPages)].map((_, pageIdx) => (
-              <button
-                key={pageIdx}
-                type="button"
-                onClick={() => goToPage(pageIdx)}
-                aria-label={`Go to product slide ${pageIdx + 1}`}
-                aria-selected={currentPage === pageIdx}
-                role="tab"
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE] ${
-                  currentPage === pageIdx
-                    ? 'w-7 bg-[#01B1EE]'
-                    : 'w-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
-                }`}
-              />
-            ))}
+        {/* Desktop & Tablet View: Carousel with Outside Left/Right Circular Arrow Controls */}
+        <div className="hidden md:block">
+          <div className="relative">
+            {/* Scrollable Products Carousel Row */}
+            <div
+              ref={scrollContainerRef}
+              onScroll={checkScroll}
+              className="flex gap-6 overflow-x-auto pb-4 scroll-smooth no-scrollbar snap-x snap-mandatory"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {PRODUCTS.map((product) => (
+                <div
+                  key={product.id}
+                  className="w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)] shrink-0 snap-start bg-white rounded-2xl border border-[#E1E7EB] shadow-xs hover:border-[#01B1EE]/60 hover:shadow-md transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+                >
+                  {/* Product Image Area */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#F7FAFC] rounded-t-2xl">
+                    <Image
+                      src={product.image}
+                      alt={product.imageAlt}
+                      width={358}
+                      height={353}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                  </div>
+
+                  {/* Product Information Area */}
+                  <div className="p-5 flex flex-col justify-between flex-1">
+                    <div>
+                      {/* Category Label */}
+                      <span className="text-token-12 font-medium text-[#006F96] tracking-wide mb-1 block">
+                        {product.category}
+                      </span>
+
+                      {/* Product Name */}
+                      <h3 className="text-token-16 md:text-token-18 font-semibold text-[#111315] line-clamp-1 mb-2 font-body">
+                        {product.name}
+                      </h3>
+
+                      {/* Price Row: Current Price, Original Price with Strikethrough, Discount Badge */}
+                      <div className="flex items-center gap-2 mb-4 flex-wrap">
+                        <span className="text-token-18 md:text-token-20 font-bold text-[#111315] tabular-nums font-body">
+                          ₹ {product.price.toLocaleString('en-IN')}
+                        </span>
+                        <span className="text-token-14 text-[#697780] line-through tabular-nums font-body">
+                          ₹ {product.originalPrice.toLocaleString('en-IN')}
+                        </span>
+                        <span className="bg-[#D1F7E8] text-[#0A7B55] text-token-12 font-bold px-2.5 py-0.5 rounded-md font-body">
+                          {product.discount}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Dark Add to Cart Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleAdd(product)}
+                      className="w-full py-3 bg-[#15191E] hover:bg-[#000000] text-white font-semibold text-token-14 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs active:scale-[0.98] font-body"
+                      aria-label={`Add ${product.name} to cart`}
+                    >
+                      {addedId === product.id ? (
+                        <>
+                          <Check className="w-4 h-4 text-[#01B1EE]" />
+                          <span>Added to Cart</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCart className="w-4 h-4" />
+                          <span>Add to Cart</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Left Arrow Button (Circular white, outside the row) */}
+            <button
+              type="button"
+              onClick={() => handleScroll('left')}
+              aria-label="Previous products"
+              className="absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-5 lg:-left-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-[#111315] border border-[#E1E7EB] shadow-md hover:bg-[#EAF8FE] hover:border-[#01B1EE] hover:text-[#006F96] flex items-center justify-center transition-all active:scale-95 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE]"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            {/* Right Arrow Button (Circular white, outside the row) */}
+            <button
+              type="button"
+              onClick={() => handleScroll('right')}
+              aria-label="Next products"
+              className="absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-5 lg:-right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-[#111315] border border-[#E1E7EB] shadow-md hover:bg-[#EAF8FE] hover:border-[#01B1EE] hover:text-[#006F96] flex items-center justify-center transition-all active:scale-95 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE]"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
           </div>
-        )}
+
+          {/* Standardized Pagination Indicators: 8px Grey Dots & 28px Cyan Pill */}
+          {totalPages > 1 && (
+            <div
+              className="mt-8 sm:mt-10 flex items-center justify-center gap-2"
+              role="tablist"
+              aria-label="Product carousel pagination"
+            >
+              {[...Array(totalPages)].map((_, pageIdx) => (
+                <button
+                  key={pageIdx}
+                  type="button"
+                  onClick={() => goToPage(pageIdx)}
+                  aria-label={`Go to product slide ${pageIdx + 1}`}
+                  aria-selected={currentPage === pageIdx}
+                  role="tab"
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#01B1EE] ${
+                    currentPage === pageIdx
+                      ? 'w-7 bg-[#01B1EE]'
+                      : 'w-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

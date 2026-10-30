@@ -17,6 +17,7 @@ interface NavbarProps {
   onOpenAccount: () => void;
   onOpenConsultation: () => void;
   isScrolled: boolean;
+  onMobileMenuChange?: (open: boolean) => void;
 }
 
 export function Navbar({
@@ -25,13 +26,35 @@ export function Navbar({
   onOpenAccount,
   onOpenConsultation,
   isScrolled,
+  onMobileMenuChange,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileShopOpen, setMobileShopOpen] = useState(false);
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false);
+
+  // Notify parent of mobile menu open state and lock body scroll
+  useEffect(() => {
+    onMobileMenuChange?.(mobileMenuOpen);
+    if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [mobileMenuOpen, onMobileMenuChange]);
 
   // Close mobile drawer on route / anchor jump
   const handleNavClick = (anchorId: string) => {
     setMobileMenuOpen(false);
+    setMobileShopOpen(false);
     setShopDropdownOpen(false);
     const element = document.getElementById(anchorId);
     if (element) {
@@ -54,7 +77,7 @@ export function Navbar({
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
+        isScrolled || mobileMenuOpen
           ? 'bg-white/95 backdrop-blur-md border-b border-[#E1E7EB] shadow-xs py-2 md:py-2.5'
           : 'bg-transparent py-3 md:py-3.5'
       }`}
@@ -63,7 +86,7 @@ export function Navbar({
         <div className="flex items-center justify-between gap-6 lg:gap-8">
           {/* Zone 1: Logo */}
           <div className="shrink-0 flex items-center">
-            <Logo isTransparentHeader={!isScrolled} />
+            <Logo isTransparentHeader={!isScrolled && !mobileMenuOpen} />
           </div>
 
           {/* Zone 2: Navigation Links (Desktop) */}
@@ -174,7 +197,7 @@ export function Navbar({
               type="button"
               onClick={onOpenAccount}
               className={`p-2 rounded-full transition-colors ${
-                isScrolled
+                isScrolled || mobileMenuOpen
                   ? 'text-[#111315] hover:bg-slate-100'
                   : 'text-white hover:bg-white/20'
               }`}
@@ -188,7 +211,7 @@ export function Navbar({
               type="button"
               onClick={onOpenCart}
               className={`relative p-2 rounded-full transition-colors ${
-                isScrolled
+                isScrolled || mobileMenuOpen
                   ? 'text-[#111315] hover:bg-slate-100'
                   : 'text-white hover:bg-white/20'
               }`}
@@ -217,7 +240,7 @@ export function Navbar({
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-[#111315]' : 'text-white bg-black/30'
+                isScrolled || mobileMenuOpen ? 'text-[#111315]' : 'text-white bg-black/30'
               }`}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
@@ -228,64 +251,81 @@ export function Navbar({
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Navigation Menu Panel (Full-height white background extending to bottom of viewport) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[68px] z-50 bg-white border-b border-[#E1E7EB] shadow-xl animate-fade-in flex flex-col justify-between p-6 overflow-y-auto">
+        <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-white border-b border-[#E1E7EB] shadow-2xl animate-fade-in h-[calc(100vh-100%)] h-[calc(100dvh-100%)] min-h-[calc(100vh-100%)] min-h-[calc(100dvh-100%)] overflow-y-auto p-5 sm:p-6 flex flex-col justify-between gap-6">
           <div className="space-y-4">
-            <div className="space-y-1 pb-4 border-b border-[#E1E7EB]">
-              <p className="text-token-12 font-bold uppercase tracking-wider text-[#697780]">
-                Shop Collections
-              </p>
-              <a
-                href="#categories"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('categories');
-                }}
-                className="block py-2 text-token-18 font-semibold text-[#111315]"
+            {/* Expandable Shop Collections Accordion */}
+            <div className="pb-3 border-b border-[#E1E7EB]">
+              <button
+                type="button"
+                onClick={() => setMobileShopOpen(!mobileShopOpen)}
+                className="w-full flex items-center justify-between py-2 text-left text-[#111315] font-semibold text-token-18 hover:text-[#006F96] transition-colors"
+                aria-expanded={mobileShopOpen}
               >
-                All Hair Solutions
-              </a>
-              <a
-                href="#categories"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('categories');
-                }}
-                className="block py-1 text-token-16 text-[#47515A]"
-              >
-                Hair Patches / Hair Systems
-              </a>
-              <a
-                href="#categories"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('categories');
-                }}
-                className="block py-1 text-token-16 text-[#47515A]"
-              >
-                Custom Lace Front Wigs
-              </a>
-              <a
-                href="#categories"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('categories');
-                }}
-                className="block py-1 text-token-16 text-[#47515A]"
-              >
-                Hair Extensions
-              </a>
+                <span>Shop Collections</span>
+                <ChevronDown
+                  className={`w-5 h-5 text-[#697780] transition-transform duration-200 ${
+                    mobileShopOpen ? 'rotate-180 text-[#01B1EE]' : ''
+                  }`}
+                />
+              </button>
+
+              {mobileShopOpen && (
+                <div className="pl-3 pr-1 py-2 space-y-2 mt-1 border-l-2 border-[#01B1EE]/30 animate-fade-in">
+                  <a
+                    href="#categories"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('categories');
+                    }}
+                    className="block py-1.5 text-token-15 font-semibold text-[#006F96] hover:text-[#01B1EE]"
+                  >
+                    All Hair Solutions
+                  </a>
+                  <a
+                    href="#categories"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('categories');
+                    }}
+                    className="block py-1 text-token-15 text-[#47515A] hover:text-[#111315]"
+                  >
+                    Hair Patches / Hair Systems
+                  </a>
+                  <a
+                    href="#categories"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('categories');
+                    }}
+                    className="block py-1 text-token-15 text-[#47515A] hover:text-[#111315]"
+                  >
+                    Custom Lace Front Wigs
+                  </a>
+                  <a
+                    href="#categories"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('categories');
+                    }}
+                    className="block py-1 text-token-15 text-[#47515A] hover:text-[#111315]"
+                  >
+                    Hair Extensions
+                  </a>
+                </div>
+              )}
             </div>
 
-            <div className="space-y-2 py-2 border-b border-[#E1E7EB]">
+            {/* Standard Nav Links */}
+            <div className="space-y-1.5 py-1 border-b border-[#E1E7EB]">
               <a
                 href="#services"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavClick('services');
                 }}
-                className="block py-2 text-token-18 font-semibold text-[#111315]"
+                className="block py-2 text-token-17 font-semibold text-[#111315] hover:text-[#006F96]"
               >
                 Our Services
               </a>
@@ -295,9 +335,9 @@ export function Navbar({
                   e.preventDefault();
                   handleNavClick('centres');
                 }}
-                className="block py-2 text-token-18 font-semibold text-[#111315]"
+                className="block py-2 text-token-17 font-semibold text-[#111315] hover:text-[#006F96]"
               >
-                Our Centres (Raipur & Regional)
+                Our Centres (Raipur &amp; Regional)
               </a>
               <a
                 href="#about"
@@ -305,7 +345,7 @@ export function Navbar({
                   e.preventDefault();
                   handleNavClick('about');
                 }}
-                className="block py-2 text-token-18 font-semibold text-[#111315]"
+                className="block py-2 text-token-17 font-semibold text-[#111315] hover:text-[#006F96]"
               >
                 About Mahaveer
               </a>
@@ -315,35 +355,22 @@ export function Navbar({
                   e.preventDefault();
                   handleNavClick('contact');
                 }}
-                className="block py-2 text-token-18 font-semibold text-[#111315]"
+                className="block py-2 text-token-17 font-semibold text-[#111315] hover:text-[#006F96]"
               >
-                Contact & Support
+                Contact &amp; Support
               </a>
-            </div>
-
-            <div className="pt-2 flex items-center justify-between text-token-14 text-[#47515A]">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAccount();
-                }}
-                className="flex items-center gap-2 py-2 text-[#111315] font-medium"
-              >
-                <User className="w-5 h-5 text-[#01B1EE]" />
-                <span>My Account / Login</span>
-              </button>
             </div>
           </div>
 
-          <div className="pt-6">
+          {/* Bottom Action CTA */}
+          <div className="pt-2">
             <button
               type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenConsultation();
               }}
-              className="w-full py-3 px-4 bg-[#01B1EE] hover:bg-[#00A2D9] text-[#111315] font-semibold text-token-16 rounded-lg text-center flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 bg-[#01B1EE] hover:bg-[#00A2D9] text-[#111315] font-semibold text-token-16 rounded-xl text-center flex items-center justify-center gap-2 shadow-xs active:scale-[0.99] transition-all"
             >
               <Calendar className="w-5 h-5" />
               <span>Book an Appointment</span>
